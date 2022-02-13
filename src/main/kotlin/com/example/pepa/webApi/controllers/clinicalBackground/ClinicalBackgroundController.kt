@@ -5,10 +5,7 @@ import com.example.pepa.webApi.controllers.clinicalBackground.dataContracts.requ
 import com.example.pepa.webApi.controllers.clinicalBackground.dataContracts.response.ClinicalBackgroundsResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 class ClinicalBackgroundController {
@@ -17,16 +14,22 @@ class ClinicalBackgroundController {
     private lateinit var service: ClinicalBackgroundService
 
     @PostMapping("/{person_id}/clinical_backgrounds")
-    fun saveClinicalBackground(
+    fun save(
         @PathVariable("person_id") id: String, @RequestBody background: ClinicalBackgroundsRequest
     ): ResponseEntity<ClinicalBackgroundsResponse> {
-        val list = service.saveNewClinicalBackground(id, background.clinicalBackgrounds)
-        return ResponseEntity.ok(ClinicalBackgroundsResponse(list))
+        val responseList = service.saveNewClinicalBackground(id, background.clinicalBackgrounds)
+        return ResponseEntity.ok(ClinicalBackgroundsResponse(responseList))
     }
 
     @PostMapping("/clinical_backgrounds")
-    fun newClinicalBackground(@RequestBody background: ClinicalBackgroundsRequest): ResponseEntity<ClinicalBackgroundsResponse> {
-        val list = service.saveNewClinicalBackground(null, background.clinicalBackgrounds)
-        return ResponseEntity.ok(ClinicalBackgroundsResponse(list))
+    fun new(@RequestBody background: ClinicalBackgroundsRequest): ResponseEntity<ClinicalBackgroundsResponse> {
+        val responseList = service.saveNewClinicalBackground(null, background.clinicalBackgrounds)
+        return ResponseEntity.ok(ClinicalBackgroundsResponse(responseList))
+    }
+
+    @GetMapping("/{person_id}/clinical_backgrounds")
+    fun getAll(@PathVariable("person_id") id: String): ResponseEntity<ClinicalBackgroundsResponse> {
+        val responseList = service.getAllBackgrounds(id)
+        return ResponseEntity.ok(ClinicalBackgroundsResponse(responseList))
     }
 }

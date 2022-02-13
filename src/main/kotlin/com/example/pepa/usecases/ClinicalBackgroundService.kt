@@ -52,6 +52,14 @@ class ClinicalBackgroundService {
         return list
     }
 
+    fun getAllBackgrounds(personId: String): List<ClinicalBackground> {
+        val list = repository.findAllByPersonId(UUID.fromString(personId))
+        if(list.isEmpty()){
+            throw Exception("No records were found for id: $personId")
+        }
+        return list
+    }
+
     private fun verifyClinicalBackgrounds(backgrounds: List<ClinicalBackgroundRequest>) {
         for (background in backgrounds) {
             if (!(validMap.containsKey(background.type) && validMap[background.type]!!.contains(background.value))) {

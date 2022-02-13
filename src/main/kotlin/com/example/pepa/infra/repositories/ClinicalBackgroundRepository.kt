@@ -6,4 +6,5 @@ import java.util.*
 
 interface ClinicalBackgroundRepository : MongoRepository<ClinicalBackground, String> {
     fun existsByPersonId(personId: UUID): Boolean
+    fun findAllByPersonId(personId: UUID): List<ClinicalBackground>
 }

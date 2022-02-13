@@ -89,6 +89,29 @@ class ClinicalBackgroundServiceTests {
             }
         }
     }
+    @Nested
+    inner class GetAllBackgrounds {
+        @Test
+        fun `Clinical background exists`() {
+            val personId = saveValidClinicalBackground()
+            val list = service.getAllBackgrounds(personId)
+            val validClinicalBackground = list.first()
+            Assertions.assertNotNull(validClinicalBackground.id)
+            Assertions.assertEquals(validClinicalBackground.personId.toString(), personId)
+            Assertions.assertEquals(validClinicalBackground.value, value1)
+            Assertions.assertEquals(validClinicalBackground.type, type1)
+            Assertions.assertEquals(validClinicalBackground.createdAt, createdAtInstant)
+        }
+
+        @Test
+        fun `Clinical background does not exists`() {
+            val personId = UUID.randomUUID().toString()
+            val exception = assertThrows<Exception> {
+                service.getAllBackgrounds(personId)
+            }
+            Assertions.assertEquals(exception.message, "No records were found for id: $personId")
+        }
+    }
 
     private fun buildValidClinicalBackgroundList(): List<ClinicalBackgroundRequest> {
         return listOf(ClinicalBackgroundRequest(type1, value1, createdAt))

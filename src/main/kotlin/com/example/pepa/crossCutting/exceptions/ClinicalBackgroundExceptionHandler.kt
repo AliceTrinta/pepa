@@ -1,6 +1,6 @@
 package com.example.pepa.crossCutting.exceptions
 
-import com.example.pepa.webApi.controllers.clinicalBackground.ErrorResponse
+import com.example.pepa.webApi.controllers.ErrorResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
