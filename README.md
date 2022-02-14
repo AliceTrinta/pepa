@@ -26,7 +26,6 @@ This work uses:
 * [MongoDB](https://www.mongodb.com/golang)
 * [Spring](https://docs.spring.io/spring-framework/docs/current/reference/html/)
 * [Gradle](https://gradle.org/)
-* [Docker](https://www.docker.com/)
 
 
 <!-- GETTING STARTED -->
@@ -36,7 +35,9 @@ Follow pass-by-pass to run the project in your machine.
 
 ### Prerequisites
 
-1. Have Installed Docker on your machine
+1. Have Installed Gradle on your machine
+2. Have Installed Java on your machine
+3. Have Installed MongoDB on your machine
 
 ### Installation
 
