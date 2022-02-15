@@ -55,7 +55,7 @@ Second step: run the PepaApplication.
 
 ```sh
 
-petit
+pepa
 
      |
 
